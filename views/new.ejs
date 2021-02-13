@@ -1,0 +1,71 @@
+<%- include ('_layouts/header') %> 
+
+            <form id="paymentForm">
+                  <!-- <div class="form-group"> -->
+                     <!-- <label for="email">Email Address</label> -->
+                     <input type="hidden" name="email" id="email-address" required value="<%=  email %>" />
+                  <!-- </div> -->
+                  <!-- <div class="form-group"> -->
+                     <!-- <label for="amount">Amount</label> -->
+                     <input type="hidden" name="amount" id="amount" required value="<%=  amount %>" />
+                  <!-- </div> -->
+                  <!-- <div class="form-group"> -->
+                     <!-- <label for="first-name">First Name</label> -->
+                     <input type="hidden" name="firstName" id="first-name" value="<%=  firstName %>" />
+                  <!-- </div> -->
+                  <!-- <div class="form-group"> -->
+                     <!-- <label for="last-name">Last Name</label> -->
+                     <input type="hidden" name="lastName" id="last-name" value="<%=  lastName %>" />
+                  <!-- </div> -->
+                  <!-- <div class="form-submit"> -->
+                     <button class="btn btn-warning" id="btn" type="submit" onclick="payWithPaystack()"> Buy Now </button>
+                  <!-- </div> -->
+      </form>
+      <script src="https://js.paystack.co/v1/inline.js"></script> 
+
+         </td>
+      </tr>
+
+
+<script>
+
+
+const paymentForm = document.getElementById('paymentForm');
+paymentForm.addEventListener("submit", payWithPaystack, false);
+
+// window.onload=function(){
+//       document.getElementById("btn").click();
+//       // alert('Page Loaded')
+
+      function payWithPaystack(e) {
+         e.preventDefault();
+         let handler = PaystackPop.setup({
+            key: 'pk_test_8fa902253fbe543ee108a6592435eb8ac9614f92', // Replace with your public key
+            email: document.getElementById("email-address").value,
+            amount: document.getElementById("amount").value * 100,
+            ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+            // label: "Optional string that replaces customer email"
+            onClose: function(){
+               alert('Window closed.');
+            },
+            callback: function(response){
+               let message = 'Payment complete! Reference: ' + response.reference;
+               alert(message);
+            }
+         });
+         handler.openIframe();
+      };
+
+window.onload = function(){
+  document.getElementById('btn').click();
+  
+// var scriptTag = document.createElement("script");
+// scriptTag.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
+// document.getElementsByTagName("head")[0].appendChild(scriptTag);
+}
+
+
+// };
+
+</script>
+<%- include ('_layouts/footer') %> 

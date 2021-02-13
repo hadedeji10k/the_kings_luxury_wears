@@ -1,0 +1,63 @@
+<%- include ('../views/_layouts/adminheader') %> 
+
+<h1 class="page-title">Home Page Products</h1>
+<a href="/admin/home-Page/add-product" class="btn btn-primary">Add a new Product</a>
+<br> <br>
+
+<% if (count > 0) { %>
+ 
+<table class="table table-striped alignmiddle">
+
+    <thead>
+        <tr class="home">
+            <th>Product</th>
+            <th>Price</th>
+            <th>Type</th>
+            <th>Product Image</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <% products.forEach(product => { %>
+        <tr>
+            <td> <%= product.title %>  </td>
+            <td>&#8358; <%= parseFloat(product.price).toFixed(2)  %>  </td>
+            <td> <%= product.type %>  </td>
+            <td> 
+
+                <% if (product.image == "") { %> 
+                    <img id="noimage" src="/images/noimage.png">
+                <% } else { %>
+                    <img id="noimage" src="/home_images/<%= product.id %>/<%= product.image %>">
+                <% } %>
+
+
+            </td>
+            <td><a href="/admin/home-page/edit-product/<%= product._id %>">Edit</a></td>
+
+            <td><a class="confirmDeletion" href="/admin/home-page/delete-product/<%= product._id %>">Delete</a></td>
+
+            
+        </tr> 
+
+        <% }) %>
+
+    </tbody>
+
+</table>
+
+<% } else { %>
+    <h3 class="text-center">There are no products</h3>
+<% } %>
+
+
+<!-- Jquery UI -->
+<!-- <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> -->
+<!-- offline J1query UI -->
+<script src="/js/jquery-ui.js"></script>
+
+
+<%- include ('../views/_layouts/adminfooter') %> 

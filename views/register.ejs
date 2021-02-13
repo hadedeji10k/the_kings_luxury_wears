@@ -1,0 +1,71 @@
+<%- include ('_layouts/header1') %> 
+
+<div class="container1">
+    <div class="img">
+        <img src="/images/bg.svg">
+    </div>
+    <div class="login-content">
+        <form action="/users/register" method="post">
+            <img src="/images/avatar.svg">
+            <h4 class="title">Welcome! <br> Register to The king's Luxury Wears </h4> <br>
+               <div class="input-div one">
+                  <div class="i">
+                          <i class="fas fa-user"></i>
+                  </div>
+                  <div class="div">
+                          <h5>Name</h5>
+                          <input type="text" class="input" name="name">
+                  </div>
+               </div>
+               <div class="input-div one">
+                  <div class="i">
+                          <i class="fas fa-user"></i>
+                  </div>
+                  <div class="div">
+                          <h5>Email</h5>
+                          <input type="email" class="input" name="email">
+                  </div>
+               </div>
+               <div class="input-div one">
+                  <div class="i">
+                          <i class="fas fa-user"></i>
+                  </div>
+                  <div class="div">
+                          <h5>Username</h5>
+                          <input type="text" class="input" name="username">
+                  </div>
+               </div>
+               <div class="input-div one">
+                  <div class="i">
+                          <i class="fas fa-user"></i>
+                  </div>
+                  <div class="div">
+                          <h5>Phone Number:</h5>
+                          <input type="text" class="input" name="phone" >
+                  </div>
+               </div>
+               <div class="input-div pass">
+                  <div class="i"> 
+                       <i class="fas fa-lock"></i>
+                  </div>
+                  <div class="div">
+                       <h5>Password</h5>
+                       <input type="password" class="input" name="password">
+               </div>
+            </div>
+               <div class="input-div pass">
+                  <div class="i"> 
+                       <i class="fas fa-lock"></i>
+                  </div>
+                  <div class="div">
+                       <h5>Confirm Password</h5>
+                       <input type="password" class="input" name="password2">
+               </div>
+            </div>
+            <p>Already registered?<a href="/users/login"> Sign In</a></p>
+            <input type="submit" class="btn" value="Register">
+        </form>
+    </div>
+</div>
+
+<%- include ('_layouts/footer1') %> 

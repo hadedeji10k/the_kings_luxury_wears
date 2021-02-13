@@ -1,0 +1,25 @@
+<%- include ('_layouts/header1') %> 
+
+<div class="container1">
+    <div class="img">
+        <img src="/images/bg.svg">
+    </div>
+    <div class="login-content">
+        <form action="/users/change-phone/<%= id %> " method="post">
+            <img src="/images/avatar.svg">
+            <h4 class="title">Welcome! <%= user.name %> <br> Enter your new phone number below</h4> <br>
+               <div class="input-div one">
+                  <div class="i">
+                          <i class="fas fa-user"></i>
+                  </div>
+                  <div class="div">
+                          <h5>Your new Phone Number</h5>
+                          <input type="text" class="input" name="phone" required>
+                  </div>
+               </div>
+            <input type="submit" class="btn" value="Change Phone Number">
+        </form>
+    </div>
+</div>
+
+<%- include ('_layouts/footer1') %> 

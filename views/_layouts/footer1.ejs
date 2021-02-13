@@ -1,0 +1,82 @@
+     <br><br><br>
+     
+     <!--========== FOOTER ==========-->
+        <footer class="footer section bd-container">
+            <div class="footer__container bd-grid">
+                <div class="footer__content">
+                    <a href="/" class="footer__logo">The king's Luxury Wears</a>
+                    <span class="footer__description">Boutique</span>
+                    <div>
+                        <a target="_blank" href="http://wa.me/+2347068180167" class="footer__social"><i class='bx bxl-whatsapp'></i></a>
+                        <a target="_blank" href="https://facebook.com/the_kings_luxury_wears-101060198589210" class="footer__social"><i class='bx bxl-facebook'></i></a>
+                        <a target="_blank" href="https://www.instagram.com/the_kings_luxury_wears/" class="footer__social"><i class='bx bxl-instagram'></i></a>
+                        <a target="_blank" href="https://mobile.twitter.com/the_kings_wears" class="footer__social"><i class='bx bxl-twitter'></i></a>
+                    </div>
+                </div>
+                <!-- 
+                <div class="footer__content">
+                    <h3 class="footer__title">Services</h3>
+                    <ul>
+                        <li><a href="#" class="footer__link">Delivery</a></li>
+                        <li><a href="#" class="footer__link">Reserve your spot</a></li>
+                    </ul>
+                </div> -->
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Information</h3>
+                    <ul>
+                        <li><a href="/about-us#contact-us" class="footer__link">Contact us</a></li>
+                        <li><a href="/privacy" class="footer__link">Privacy policy</a></li>
+                        <li><a href="/terms-of-services" class="footer__link">Terms of services</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Address</h3>
+                    <ul>
+                        <li>02, Jesu Oseun</li>
+                        <li>Off Rafco Street</li>
+                        <li>Agbado station</li>
+                        <li>Ogun State.</li>
+                        <li>thekingsluxurywears@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="footer__copy">&#169; &nbsp; <span id="year"></span> The king's Luxury Wears. All right reserved</p>
+        </footer>
+
+
+        
+
+        <script>
+            const date = new Date();
+            const option = {year : "numeric"};
+            const year = date.toLocaleDateString("en-us", option)
+            const spanYear = document.getElementById("year");
+        
+            spanYear.innerText = year;
+        </script>
+
+
+        <!-- Online Bootstrap JavaScript -->
+        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"> </script> -->
+        <!-- Online fancybox -->
+        <!-- <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script> -->
+
+        <!-- Offline Bootstrap JavaScript -->
+        <script src="/js/bootstrap.js"> </script>
+        <!-- Offline fancybox -->
+        <script src="/js/fancy.js"></script>
+        <script src="/js/jquery.js"> </script>
+
+
+
+        <!--========== SCROLL REVEAL ==========-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--========== MAIN JS ==========-->
+        <script src="/js/main.js"></script>
+        <script src="/js/main1.js"></script>
+    </body>
+</html>

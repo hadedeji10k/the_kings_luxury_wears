@@ -1,0 +1,36 @@
+<%- include ('_layouts/header1') %> 
+
+<div class="container1">
+    <div class="img">
+        <img src="/images/bg.svg">
+    </div>
+    <div class="login-content">
+        <form action="/users/login" method="post">
+            <img src="/images/avatar.svg">
+            <h4 class="title">Welcome! <br> Login to The King's Luxury Wears</h4> <br>
+               <div class="input-div one">
+                  <div class="i">
+                          <i class="fas fa-user"></i>
+                  </div>
+                  <div class="div">
+                          <h5>Username</h5>
+                          <input type="text" class="input" name="username">
+                  </div>
+               </div>
+               <div class="input-div pass">
+                  <div class="i"> 
+                       <i class="fas fa-lock"></i>
+                  </div>
+                  <div class="div">
+                       <h5>Password</h5>
+                       <input type="password" class="input" name="password">
+               </div>
+            </div>
+            <a href="/users/forgot-password">Forgot Password?</a>
+            <input type="submit" class="btn" value="Login">
+            <a href="/users/register">Not Registered? Register Now</a>
+        </form>
+    </div>
+</div>
+
+<%- include ('_layouts/footer1') %> 

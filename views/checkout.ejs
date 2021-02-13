@@ -1,0 +1,214 @@
+<%- include ('_layouts/header1') %> 
+
+<% if (typeof cart !== "undefined") { %>
+
+    <div class="small-container cart-page">
+        <table>
+
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+
+            <div class="none" id="cart">
+            <% cart.forEach(product => { %>
+                <li class="cartLi"><%= product.qty %> of <%= product.title %></li>
+            <% }) %> 
+            </div> 
+
+
+            <% var total = 0 %>
+            <% cart.forEach(product => { %>
+            <% var sub = parseFloat(product.qty * product.price).toFixed(2) %> 
+            <% total += +sub %>
+            
+            <tr>
+                <td>
+                    <div class="cart-info">
+                        <img src="<%= product.image %>" alt="">
+                        <div>
+                            <p><%= product.title.substring(0,10) %></p>
+                            <small>&#8358;<%= parseFloat(product.price).toFixed(2) %></small> <br>
+                            <a href="/cart/update/<%= product.title %>?action=clear">Remove</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a href="/cart/update/<%= product.title %>?action=add">+</a> &nbsp;
+                    <a><%= product.qty %></a> &nbsp; 
+                    <a href="/cart/update/<%= product.title %>?action=remove">-</a> &nbsp;
+                </td>
+                <td>&#8358;<%= sub %></td>
+            </tr>
+            <% }) %>
+        </table>
+        <hr>
+    <br>
+   
+            <table>
+                <tr>
+                    <td align="right">Sub-Totals: &nbsp; &nbsp; &#8358;<%=  parseFloat(total).toFixed(2) %></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <h5>Choose Delivery Station</h5>
+                    <select id="selectBox" onchange="changeFunc();">
+                        <option value="0">Kola Bus-Stop -- &#8358;0</option>
+                       <option value="2000">Lagos Island -- &#8358;2000</option>
+                       <option value="1500">Lagos mainland -- &#8358;1500</option>
+                       <option value="1500">Ogun State -- &#8358;1500</option>
+                    </select> <br>
+                    
+                    
+                </tr>
+                <tr>
+                    <td align="right" ><span>Delivery Price: &#8358; &nbsp;</span><span id="price2">0</span></td>
+                </tr>
+                <tr>
+                    <td align="right" id="">Totals: &nbsp; &#8358;<span id="totalCartAmount"></span></td>
+                </tr>
+            </table>
+            <input type="hidden" id="deliveryLocation" value="" />
+            <div class="paymentForm">
+                <a href="/cart/clear" class="btn1-danger clearcart">Clear cart</a>
+                <br><br>
+                <form class="paymentForm" id="paymentForm" method="post" >
+                    <!-- <div class="form-group"> -->
+                    <!-- <label for="email">Email Address</label> -->
+                    <input type="hidden" name="email" id="email-address" required value="adedejiyusuf26@gmail.com" />
+                    <!-- </div> -->
+                    <!-- <div class="form-group"> -->
+                    <!-- <label for="amount">Amount</label> -->
+                    <input type="hidden" name="amount" id="amount" required value="" />
+                    <!-- </div> -->
+                    <!-- <div class="form-group"> -->
+                    <!-- <label for="first-name">First Name</label> -->
+                    <input type="hidden" name="firstName" id="first-name" value="Adedeji" />
+                    <!-- </div> -->
+                    <!-- <div class="form-group"> -->
+                    <!-- <label for="last-name">Last Name</label> -->
+                    <input type="hidden" name="lastName" id="last-name" value="Yusuf" />
+                    <!-- </div> -->
+                    <!-- <div class="form-submit"> -->
+                        <% if (loggedIn) { %>
+                            <p>Please check thoroughly! <br> (delivery location & products to be purchased) <br> before clicking buy now</p>
+                            <br>
+                            <button class="btn1" onclick="payWithPaystack()" type="submit"> Buy Now </button>
+                            <% } else { %>
+                            <p><a href="/users/login">Please Log in to continue checkout!</a></small>
+                        <% } %>
+                    <!-- </div>  -->
+                <script src="https://js.paystack.co/v1/inline.js"></script> 
+
+                </form>
+            </div>
+
+    </div>
+<% } else { %>
+    <h3 class="text-center">Your current cart is empty!</h3>
+   <p class="text-center"><a href="/products/">Go to Products</a></p>
+<% } %>
+
+
+
+<script>
+
+$(function(){
+    $('a.clearcart').on('click' , function () {
+        if(!confirm('Confirm clearing your cart')) return false ;
+    });
+})
+
+
+var total = <%= total %>
+
+document.getElementById("amount").value = (total).toFixed(2)
+document.getElementById("totalCartAmount").innerHTML = (total).toFixed(2)
+document.getElementById("deliveryLocation").value = "Kola Bus-stop"
+
+
+function changeFunc() {
+    var selectBox = document.getElementById("selectBox");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    // get html content of the selected delivery into p tag
+    var selectedHtml = selectBox.options[selectBox.selectedIndex].innerHTML;
+    document.getElementById("deliveryLocation").value = selectedHtml
+
+    // Change price after delivery has been change
+    document.getElementById("price2").innerHTML = selectedValue
+    const delivery = document.getElementById("price2").innerHTML
+    let delivery1 = parseInt(delivery)
+    let total1 = parseInt(total)
+
+    const price = (total1 + delivery1).toFixed(2)
+    document.getElementById("amount").value = price;
+    document.getElementById("totalCartAmount").innerHTML = price
+
+}
+
+
+
+
+// Paystack integration
+const paymentForm = document.getElementById("paymentForm");
+
+// get element of cart title from cart page
+const cart = document.getElementById("cart");
+const cartLi = document.getElementsByClassName("cartLi");
+// push each title into array
+var output = new Array();
+for (var i = 0; i < cartLi.length; i++) {
+  output.push(cartLi[i].textContent);
+}
+
+paymentForm.addEventListener("submit", payWithPaystack, false);
+function payWithPaystack(e) {
+  let deliveryLocation = document.getElementById("deliveryLocation").value;
+  e.preventDefault();
+  let handler = PaystackPop.setup({
+    key: "pk_test_8fa902253fbe543ee108a6592435eb8ac9614f92",
+    email: document.getElementById("email-address").value,
+    amount: document.getElementById("amount").value * 100,
+    ref: "" + Math.floor(Math.random() * 1000000000 + 1),
+    // label: "Optional string that replaces customer email"
+    onClose: function () {
+      alert("Payment canceled!");
+    },
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Cart",
+          variable_name: "Cart",
+          value: output,
+        },
+        {
+          display_name: "Delivery Location",
+          variable_name: "Delivery Location",
+          value: deliveryLocation,
+        },
+      ],
+    },
+    // callback: function (response) {
+    //   let message = "Payment complete! Reference: " + response.reference;
+    //   alert(message);
+    // },
+    callback: function (response) {
+      window.location =
+        "http://localhost:3000/verify_transaction?reference=" +
+        response.reference +
+        "&cart=" +
+        output +
+        "&deliveryLocation=" +
+        deliveryLocation;
+    },
+  });
+  handler.openIframe();
+}
+
+
+</script>
+
+
+<%- include ('_layouts/footer1') %> 

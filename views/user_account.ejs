@@ -1,0 +1,54 @@
+<%- include ('_layouts/header1') %> 
+<br>
+<div class="center">
+    
+
+     <img src="/images/avatar.svg" width="100px">
+    <p>Welcome <%= user.name %> !</p>
+    <% if (user.email.length == 0) { %>
+        <p>E-mail Address: Not Available!</p>
+    <% } else { %>
+        <p>E-mail Address: <%= user.email %></p>
+    <% } %> 
+    <% if (user.phone.length == 0) { %>
+        <p>Phone Number: Not Available!</p>
+    <% } else { %>
+        <p>Phone Number: <%= user.phone %></p>
+    <% } %> 
+<br><br>
+    <h2>Other Settings</h2> <br>
+    <a href="/users/change-password/<%= user.id %>/10" class="button">Change Password</a> &nbsp;&nbsp;&nbsp;
+    <a href="/users/change-email/<%= user.id %>" class="button">Change E-mail</a>&nbsp;&nbsp;&nbsp;
+    <a href="/users/change-phone/<%= user.id %>" class="button">Change Phone</a>
+  
+    <div class="small-container cart-page">
+        <h2>Your Orders</h2> <br>
+        <% if (user.reference.length == 0) { %>
+            <p>Your order is empty!</p> <br>
+            <p>Kindly patronize us for we are reliable!</p>
+        <% } else { %> 
+        <table>
+            <p>Note: Orders after 3 months will be deleted! </p> 
+            <p>We are sorry for the inconveniency. Kindly bear with us!</p> <br> 
+            <tr>
+                <th style="text-align: center;">Reference Id</th>
+                <th style="text-align: center;">Date of Transaction</th>
+                <!-- <th style="text-align: center;">Delete</th> -->
+            </tr>
+            <% user.reference.forEach(reference => { %>
+    
+                <tr>
+                   <td style="text-align: center;"> <%= reference.referenceId %>  </td>
+                   <td style="text-align: center;"> <%= reference.date %> </td>
+                   <!-- <td style="text-align: center;"><a class="confirmDeletion" href="/users/delete-reference/<%= user.id %> /<%= reference._id %>">Delete</a></td> -->  
+                </tr> 
+       
+               <% }) %>
+       
+        </table>
+        <% } %> 
+    </div>
+    
+</div>
+
+<%- include ('_layouts/footer1') %> 

@@ -1,0 +1,91 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Admin - Store</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" > -->
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <!-- Jquery -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- Offline Jquery -->
+    <script src="/js/jquery.js"></script>
+
+
+    <link rel="stylesheet" href="/css/adminstyles.css">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      body {
+            padding-top: 5rem;
+        }
+        
+        .starter-template {
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="/admin" target="_blank">Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="/admin/pages">Pages</a>
+                  </li> -->
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/categories">Categories</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/products">Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/home-page">Home products</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a class="nav-link" href="/users/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+    <%- messages('messages', locals) %>
+
+    <% if (errors) { %>
+      <% errors.forEach(error => { %>
+        <div class="alert alert-danger">
+        <%= error.msg %>
+          </div>
+    <%  }); %>
+   <% } %>
