@@ -1,36 +1,5 @@
 <%- include ('_layouts/header1') %> 
 
-    <!-- <h1 class="page-header"><%= title %> </h1>
-
-    <div class="row">
-        <div class="col-xs-12 col-md-5">
-            <img src="/product_images/<%= p.id %>/<%= p.image %>" alt="" class="spi">
-            
-        </div>
-        <div class="col-xs-12 col-md-7">
-            <h4>Product Details:</h4>
-            <h6><%= p.desc %> </h6>
-            <br>
-            <h6>&#8358;<%= parseFloat(p.price).toFixed(2) %> </h6>
-            <p><a class="btn btn-success" href="/cart/add/<%= p.slug %>">Add to cart</a></p>
-        </div>
-
-        <div class="col-xs-12">
-            <ul class="gallery">
-                <% galleryImages.forEach(image => { %>
-                    <% if (image != "thumbs") { %>
-                        <li>
-                            <a data-fancybox="gallery" href="/product_images/<%= p.id %>/gallery/<%= image %>">
-                                <img src="/product_images/<%= p.id %>/gallery/thumbs/<%= image %>" >
-                            </a>
-                        </li>
-                    <% } %>
-                <% }) %>
-            </ul>
-        </div>
-
-    </div> -->
-
     <!--========== single product ==========-->
     <section class="about section bd-container">
         <div class="about__container  bd-grid">
