@@ -16,6 +16,8 @@ router.get("/", async function (req, res) {
   const sort = { _id: -1 };
   var count;
 
+  const categories = await Category.find();
+
   const products = await Product.find(query).sort(sort).limit(25);
 
   count = await Product.find().countDocuments(function (err, c) {
@@ -31,6 +33,7 @@ router.get("/", async function (req, res) {
     count: count,
     totalPages: totalPages,
     page: page,
+    categories: categories,
   });
 });
 
