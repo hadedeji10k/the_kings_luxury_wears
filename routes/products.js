@@ -72,6 +72,7 @@ router.get("/cat/:category", async function (req, res) {
   var catSlug = req.params.category;
 
   var count;
+  const categories = await Category.find();
 
   Category.findOne({ slug: catSlug }, async function (err, cat) {
     const products = await Product.find({ category: catSlug })
@@ -95,6 +96,7 @@ router.get("/cat/:category", async function (req, res) {
       count: count,
       totalPages: totalPages,
       page: page,
+      categories: categories
     });
   });
 });
