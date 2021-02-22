@@ -1,42 +1,46 @@
-<%- include ('../views/_layouts/adminheader') %> 
+<%- include ('../views/_layouts/adminheader1') %> 
+<div class=" bd-container bd-grid">
+    <div class="containermax">
+        <h1 class="page-title">Add a Home Product</h1>
+        <a href="/admin/home-page" class="button">Back to all Home Products</a>
+        <br> <br>
 
-<h1 class="page-title">Add a Product</h1>
-<a href="/admin/home-page" class="btn btn-primary">Back to all Products</a>
-<br> <br>
+        <div class="left">
+            <form action="/admin/home-page/add-product" method="post" enctype="multipart/form-data">
+                <div class="form-group">
 
-<form action="/admin/home-page/add-product" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-
-        <label for="">Title</label>
-        <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
-        
-        <br>
-        <label for="">Description</label>
-        <textarea name="desc" class="form-control" cols="30" rows="10" placeholder="Description"><%= desc %></textarea>
-        
-        <br>
-        <label for="">Type of Product</label>
-        <select name="type" class="form-control">
-               <option value="discount">Discount Product</option>
-               <option value="offer">Offer Product</option>
-        </select>
-        <br>
-        
-        <label for="">Price</label>
-        <input type="text" class="form-control" name="price" value="<%= price %>" placeholder="Price">
-        
-        <br>
-        <label for="">Discount Price</label>
-        <input type="text" class="form-control" name="discountPrice" value="<%= discountPrice %>" placeholder="Price">
-        
-        <br>
-        <label for="">Image</label>
-        <input type="file" class="form-control" name="image" id="img">
-        <img src="#" id="imgPreview">
+                    <label for="">Title</label>
+                    <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
+                    
+                    <br>
+                    <label for="">Description</label>
+                    <textarea style="resize: none;" name="desc" class="form-control" cols="30" rows="10" placeholder="Description"><%= desc %></textarea>
+                    
+                    <br>
+                    <label for="">Type of Product</label>
+                    <select name="type" class="form-control">
+                        <option value="discount">Discount Product</option>
+                        <option value="offer">Offer Product</option>
+                    </select>
+                    <br>
+                    
+                    <label for="">Price</label>
+                    <input type="text" class="form-control" name="price" value="<%= price %>" placeholder="Price">
+                    
+                    <br>
+                    <label for="">Discount Price</label>
+                    <input type="text" class="form-control" name="discountPrice" value="<%= discountPrice %>" placeholder="Price">
+                    
+                    <br>
+                    <label for="">Image</label>
+                    <input type="file" class="form-control" name="image" id="img">
+                    <img src="#" id="imgPreview">
+                </div>
+                    <button type="submit" class="button">Submit</button>
+            </form>
+        </div>
     </div>
-        <button type="submit" class="btn btn-dark">Submit</button>
-</form>
-
+</div>
 
 <script>
     
@@ -58,4 +62,4 @@
 </script>
 
 
-<%- include ('../views/_layouts/adminfooter') %> 
+<%- include ('../views/_layouts/adminfooter1') %> 

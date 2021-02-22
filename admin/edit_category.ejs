@@ -1,16 +1,19 @@
-<%- include ('../views/_layouts/adminheader') %> 
+<%- include ('../views/_layouts/adminheader1') %> 
+<div class=" bd-container bd-grid">
+    <div class="containermax">
+        <h1 class="page-title">Edit a Category</h1>
+        <a href="/admin/categories" class="button">Back to all Categories</a>
+        <br> <br><br><br>
 
-<h1 class="page-title">Edit a Category</h1>
-<a href="/admin/categories" class="btn btn-primary">Back to all Categories</a>
-<br> <br>
-
-<form action="/admin/categories/edit-category/<%= id %>" method="post">
-    <div class="form-group">
-        <label for="">Title</label>
-        <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
+        <form action="/admin/categories/edit-category/<%= id %>" method="post">
+            <div class="form-group">
+                <label for="">Title</label>
+                <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
+            </div> <br>
+            
+            <button type="submit" class="button">Submit</button>
+        </form>
     </div>
-    
-        <button type="submit" class="btn btn-dark">Submit</button>
-</form>
+</div>
 
-<%- include ('../views/_layouts/adminfooter') %> 
+<%- include ('../views/_layouts/adminfooter1') %> 

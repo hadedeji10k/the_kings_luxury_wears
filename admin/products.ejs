@@ -1,57 +1,60 @@
-<%- include ('../views/_layouts/adminheader') %> 
+<%- include ('../views/_layouts/adminheader1') %> 
+<section class="about section bd-container">
+    <div class="containermax">
+        <h1 class="page-title">Products</h1>
+        <a href="/admin/products/add-product" class="button">Add a new Product</a>
+        <br> <br>
 
-<h1 class="page-title">Products</h1>
-<a href="/admin/products/add-product" class="btn btn-primary">Add a new Product</a>
-<br> <br>
+        <% if (count > 0) { %>
+        
+        <table class="table table-striped alignmiddle">
 
-<% if (count > 0) { %>
- 
-<table class="table table-striped alignmiddle">
+            <thead>
+                <tr class="home">
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Product Image</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
 
-    <thead>
-        <tr class="home">
-            <th>Product</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Product Image</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
+            <tbody>
 
-    <tbody>
+                <% products.forEach(product => { %>
+                <tr>
+                    <td> <%= product.title %>  </td>
+                    <td>&#8358; <%= parseFloat(product.price).toFixed(2)  %>  </td>
+                    <td> <%= product.category %>  </td>
+                    <td> 
 
-        <% products.forEach(product => { %>
-        <tr>
-            <td> <%= product.title %>  </td>
-            <td>&#8358; <%= parseFloat(product.price).toFixed(2)  %>  </td>
-            <td> <%= product.category %>  </td>
-            <td> 
-
-                <% if (product.image == "") { %> 
-                    <img id="noimage" src="/images/noimage.png">
-                <% } else { %>
-                    <img id="noimage" src="/product_images/<%= product.id %>/<%= product.image %>">
-                <% } %>
+                        <% if (product.image == "") { %> 
+                            <img id="noimage" src="/images/noimage.png">
+                        <% } else { %>
+                            <img id="noimage" src="/product_images/<%= product.id %>/<%= product.image %>">
+                        <% } %>
 
 
-            </td>
-            <td><a href="/admin/products/edit-product/<%= product._id %>">Edit</a></td>
+                    </td>
+                    <td><a href="/admin/products/edit-product/<%= product._id %>">Edit</a></td>
 
-            <td><a class="confirmDeletion" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
+                    <td><a class="confirmDeletion" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
 
-            
-        </tr> 
+                    
+                </tr> 
 
-        <% }) %>
+                <% }) %>
 
-    </tbody>
+            </tbody>
 
-</table>
+        </table>
 
-<% } else { %>
-    <h3 class="text-center">There are no products</h3>
-<% } %>
+        <% } else { %>
+            <h3 class="text-center">There are no products</h3>
+        <% } %>
+    </div>
+</section>
 
 
 <!-- Jquery UI -->
@@ -60,4 +63,4 @@
 <script src="/js/jquery-ui.js"></script>
 
 
-<%- include ('../views/_layouts/adminfooter') %> 
+<%- include ('../views/_layouts/adminfooter1') %> 
