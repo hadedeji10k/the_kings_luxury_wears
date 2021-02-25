@@ -6,6 +6,15 @@ const nodemailer = require("nodemailer");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 
+var url = require("url");
+
+function getFormattedUrl(req) {
+  return url.format({
+    protocol: req.protocol,
+    host: req.get("host"),
+  });
+}
+
 // get user module
 var User = require("../models/user");
 
@@ -139,8 +148,12 @@ router.post("/forgot-password", function (req, res) {
           rejectUnauthorized: false,
         },
       });
+
+      let uri = getFormattedUrl(req);
+
       let link =
-        "http://localhost:3000/users/change-password/" +
+        uri +
+        "/users/change-password/" +
         user.id +
         "/" +
         user.forgot_password_key;
@@ -360,14 +373,14 @@ router.get("/:id", isUser, function (req, res) {
   });
 });
 
-// Delete reference order
-router.get("/delete-reference/:id/:referenceId", function (req, res) {
-  const id = req.params.id;
-  const referenceId = req.params.referenceId;
-  User.update(id, { $pull: { reference: referenceId } }, function (err, user) {
-    if (err) console.log("There was an error deleting the reference", err);
-  });
-});
+// // Delete reference order
+// router.get("/delete-reference/:id/:referenceId", function (req, res) {
+//   const id = req.params.id;
+//   const referenceId = req.params.referenceId;
+//   User.update(id, { $pull: { reference: referenceId } }, function (err, user) {
+//     if (err) console.log("There was an error deleting the reference", err);
+//   });
+// });
 
 // Exports
 module.exports = router;

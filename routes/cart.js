@@ -186,10 +186,14 @@ router.get("/checkout", function (req, res) {
     delete req.session.cart;
     res.redirect("/cart/checkout");
   } else {
+    const user = res.locals.user;
+    console.log(user);
+
     res.render("checkout", {
       title: "Checkout",
       cart: req.session.cart,
       loggedIn: loggedIn,
+      user: user,
     });
   }
 });
