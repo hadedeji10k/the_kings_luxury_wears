@@ -218,7 +218,7 @@ app.get("/verify_transaction", async function (req, res) {
       date: date,
       // status: "success",
     });
-    console.log(user.reference);
+    // console.log(user.reference);
     user.save();
   });
 
@@ -261,7 +261,7 @@ app.get("/verify_transaction", async function (req, res) {
     if (error) {
       console.log(error);
     } else {
-      console.log(info);
+      // console.log(info);
     }
   });
   // send mail to customer
@@ -281,7 +281,7 @@ app.get("/verify_transaction", async function (req, res) {
     if (error) {
       console.log(error);
     } else {
-      console.log(info);
+      // console.log(info);
     }
   });
 

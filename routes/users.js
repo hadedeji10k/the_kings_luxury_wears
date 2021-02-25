@@ -131,7 +131,7 @@ router.post("/forgot-password", function (req, res) {
     } else {
       req.flash("success", "Account found with this email!");
       res.redirect("/users/success-forgot-password");
-      console.log(user);
+      // console.log(user);
 
       const random = Math.floor(Math.random() * 1000000000 + 1);
       user.forgot_password_key = random;
@@ -162,6 +162,7 @@ router.post("/forgot-password", function (req, res) {
         to: email,
         subject: "The King's Luxury Wears Reset Password",
         html: `
+          <h2> Password Reset Link </h2> <br>
           <p>Thanks for your patience, Kindly click the text below to continue your process</p>
           <a href = ${link} > Click </a>
           `,
@@ -171,7 +172,7 @@ router.post("/forgot-password", function (req, res) {
         if (error) {
           console.log(error);
         } else {
-          console.log(info);
+          // console.log(info);
         }
       });
     }

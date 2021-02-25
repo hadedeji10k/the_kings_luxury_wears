@@ -187,7 +187,7 @@ router.get("/checkout", function (req, res) {
     res.redirect("/cart/checkout");
   } else {
     const user = res.locals.user;
-    console.log(user);
+    // console.log(user);
 
     res.render("checkout", {
       title: "Checkout",
