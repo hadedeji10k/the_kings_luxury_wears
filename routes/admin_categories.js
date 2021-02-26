@@ -7,12 +7,11 @@ const isAdmin = auth.isAdmin;
 var Category = require("../models/category");
 
 // GET Category index
-router.get("/", isAdmin, function (req, res) {
-  Category.find(function (err, categories) {
-    if (err) return console.log(err);
-    res.render("../admin/categories", {
-      categories: categories,
-    });
+router.get("/", isAdmin, async function (req, res) {
+  const categories = await Category.find();
+
+  res.render("../admin/categories", {
+    categories: categories,
   });
 });
 

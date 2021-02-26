@@ -21,18 +21,18 @@ var Product = require("../models/product");
 var Category = require("../models/category");
 
 // GET products index
-router.get("/", isAdmin, function (req, res) {
+router.get("/", isAdmin, async function (req, res) {
   var count;
 
   Product.countDocuments(function (err, c) {
     count = c;
   });
 
-  Product.find(function (err, products) {
-    res.render("../admin/products", {
-      products: products,
-      count: count,
-    });
+  const products = await Product.find();
+
+  res.render("../admin/products", {
+    products: products,
+    count: count,
   });
 });
 

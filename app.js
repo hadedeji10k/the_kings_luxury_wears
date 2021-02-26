@@ -233,7 +233,7 @@ app.get("/verify_transaction", async function (req, res) {
     service: "gmail",
     auth: {
       user: "thekingsluxurywears@gmail.com",
-      pass: "fvqpltjcamxcwhai",
+      pass: "adedeji@1",
     },
     tls: {
       rejectUnauthorized: false,

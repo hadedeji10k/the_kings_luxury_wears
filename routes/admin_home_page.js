@@ -21,18 +21,18 @@ var HomePage = require("../models/home-page");
 // var Category = require("../models/category");
 
 // GET home-page index
-router.get("/", isAdmin, function (req, res) {
+router.get("/", isAdmin, async function (req, res) {
   var count;
 
   HomePage.countDocuments(function (err, c) {
     count = c;
   });
 
-  HomePage.find(function (err, products) {
-    res.render("../admin/home_page", {
-      products: products,
-      count: count,
-    });
+  const products = await HomePage.find();
+
+  res.render("../admin/home_page", {
+    products: products,
+    count: count,
   });
 });
 
