@@ -246,7 +246,7 @@ app.get("/verify_transaction", async function (req, res) {
     to: "thekingsluxurywears@gmail.com",
     subject: "The King's Luxury Wears Order",
     html: `
-      <p> Order has been received </p>
+      <p> An Order has been received </p>
       <p> Reference ID is ${reference}</p>
       <p> Customer's email address: ${userEmail} </p>
       <p> Customer's Phone Number: ${userPhone} </p>
@@ -264,16 +264,19 @@ app.get("/verify_transaction", async function (req, res) {
       // console.log(info);
     }
   });
+
   // send mail to customer
   let mailInfo2 = {
     from: "thekingsluxurywears@gmail.com",
     to: userEmail,
     subject: "The King's Luxury Wears Order",
     html: `
-      <p> Order has been received </p>
-      <p> Your reference ID is ${reference}</p>
-      <p> Orders are as follows: </p>
+      <p> Your Order has been received. </p>
+      <p> Your reference ID is ${reference}.</p>
+      <p>Your Orders are as follow: </p>
       <p> ${cart} </p>
+      <p> For any further enquiries, please Contact 07068180167 or email us at thekingsluxurywears@gmail.com</p>
+      <p>Thanks for your Patronage</p>
       `,
   };
 

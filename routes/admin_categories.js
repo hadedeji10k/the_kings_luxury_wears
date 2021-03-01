@@ -8,10 +8,53 @@ var Category = require("../models/category");
 
 // GET Category index
 router.get("/", isAdmin, async function (req, res) {
-  const categories = await Category.find();
+  const query = {};
+  const sort = { _id: -1 };
+  var count;
+
+  Category.countDocuments(function (err, c) {
+    count = c;
+  });
+
+  const categories = await Category.find(query).sort(sort).limit(25);
+
+  const totalPages = Math.ceil(count / 25);
+  const page = 1;
 
   res.render("../admin/categories", {
     categories: categories,
+    count: count,
+    totalPages: totalPages,
+    page: page,
+  });
+});
+
+// Get Admin categories pages
+router.get("/page/:page/:totalPages", async function (req, res) {
+  const { page, totalPages } = req.params;
+  const limit = 25;
+  const skip = parseInt(parseInt(page) * limit - 25);
+
+  if (page == 1) {
+    res.redirect("/admin/categories");
+  }
+
+  var count;
+
+  const categories = await Category.find()
+    .sort({ _id: -1 })
+    .skip(skip)
+    .limit(parseInt(limit));
+
+  count = await Category.find().countDocuments(function (err, c) {
+    count = c;
+  });
+
+  res.render("../admin/categories", {
+    categories: categories,
+    page: page,
+    totalPages: totalPages,
+    count: count,
   });
 });
 
@@ -82,7 +125,7 @@ router.get("/edit-category/:id", isAdmin, function (req, res) {
   });
 });
 
-// POST edit page
+// POST edit category
 router.post("/edit-category/:id", function (req, res) {
   req.checkBody("title", "Title must have a value").notEmpty();
 

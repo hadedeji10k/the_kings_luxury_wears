@@ -20,18 +20,54 @@ var Product = require("../models/product");
 // get category module
 var Category = require("../models/category");
 
-// GET products index
+// GET Admin products index
 router.get("/", isAdmin, async function (req, res) {
+  const query = {};
+  const sort = { _id: -1 };
   var count;
 
   Product.countDocuments(function (err, c) {
     count = c;
   });
 
-  const products = await Product.find();
+  const products = await Product.find(query).sort(sort).limit(25);
+
+  const totalPages = Math.ceil(count / 25);
+  const page = 1;
 
   res.render("../admin/products", {
     products: products,
+    count: count,
+    totalPages: totalPages,
+    page: page,
+  });
+});
+
+// Get Admin product pages
+router.get("/page/:page/:totalPages", async function (req, res) {
+  const { page, totalPages } = req.params;
+  const limit = 25;
+  const skip = parseInt(parseInt(page) * limit - 25);
+
+  if (page == 1) {
+    res.redirect("/admin/products");
+  }
+
+  var count;
+
+  const products = await Product.find()
+    .sort({ _id: -1 })
+    .skip(skip)
+    .limit(parseInt(limit));
+
+  count = await Product.find().countDocuments(function (err, c) {
+    count = c;
+  });
+
+  res.render("../admin/products", {
+    products: products,
+    page: page,
+    totalPages: totalPages,
     count: count,
   });
 });
