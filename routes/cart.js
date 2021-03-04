@@ -189,11 +189,25 @@ router.get("/checkout", function (req, res) {
     const user = res.locals.user;
     // console.log(user);
 
+    let userEmail, userName, username;
+
+    if (req.isAuthenticated()) {
+      userEmail = user.email;
+      userName = user.name;
+      username = user.username;
+    } else {
+      userEmail = "";
+      userName = "";
+      username = "";
+    }
+
     res.render("checkout", {
       title: "Checkout",
       cart: req.session.cart,
       loggedIn: loggedIn,
-      user: user,
+      userEmail: userEmail,
+      userName: userName,
+      username: username,
     });
   }
 });
