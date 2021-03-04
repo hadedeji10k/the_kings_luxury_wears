@@ -3,7 +3,7 @@
 
 /*===== VARIABLES CSS =====*/
 :root {
-  --header-height: 3rem;
+  --header-height: 4rem;
 
   /*========== Colors ==========*/
   --first-color: #069C54;
@@ -577,7 +577,7 @@ input[type="text"] {
   padding: 10px;
   border-radius: 5px;
   outline: none;
-  border: none;
+  /* border: none; */
 }
 
 
