@@ -294,6 +294,6 @@ app.get("/verify_transaction", async function (req, res) {
 });
 
 // start the server
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log("Server is running at port 3000");
 });
